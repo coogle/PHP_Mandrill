@@ -81,15 +81,15 @@ class Mandrill_Mail extends \Zend_Mail
 		if(is_null($recipient)) {
 				
 			if(!empty($this->_to) && is_array($this->_to)) {
-				foreach($this->_to as $address => $name) {
-					if(!isset($this->_privateVars[$address])) {
-						$this->_privateVars[$address] = array();
+				foreach($this->_to as $to) {
+					if(!isset($this->_privateVars[$to['email']])) {
+						$this->_privateVars[$to['email']] = array();
 					}
 						
 					if(is_null($value)) {
-						$this->unsetPrivateVar($varName, $address);
+						$this->unsetPrivateVar($varName, $to['email']);
 					} else {
-						$this->_privateVars[$address][$varName] = $value;
+						$this->_privateVars[$to['email']][$varName] = $value;
 					}
 				}
 			}
@@ -134,6 +134,10 @@ class Mandrill_Mail extends \Zend_Mail
 	{
 		if(is_null($template) && is_null($this->_template)) {
 			throw new \InvalidArgumentException("You must provide a template name");
+		}
+		
+		if(!is_null($template)) {
+			$this->setTemplate($template);
 		}
 		
 		if(is_null($this->_apiKey)) {

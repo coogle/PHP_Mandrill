@@ -1,11 +1,26 @@
 <?php
 
+require_once 'Mandrill/Type/Messages.php';
+
 class Mandrill
 {
-	const BASE_API_URL = "https://mandrillapp.com/api/1.0/";
+	protected $_apiKey;
 	
-	public function messages() {
-		return new Mandrill_Type_Messages();
+	function __construct($apiKey)
+	{
+		$this->setApiKey($apiKey);
 	}
 	
+	public function messages() {
+		return new \Mandrill_Type_Messages($this->getApiKey());
+	}
+	
+	public function setApiKey($key) {
+		$this->_apiKey = $key;
+		return $this;
+	}
+	
+	public function getApiKey() {
+		return $this->_apiKey;
+	}
 }

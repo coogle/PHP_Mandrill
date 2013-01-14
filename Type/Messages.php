@@ -5,10 +5,6 @@ require_once 'Mandrill/Type/Abstract.php';
 
 class Mandrill_Type_Messages extends Mandrill_Type_Abstract
 {
-	public function send() 
-	{
-			
-	}
 	
 	public function sendTemplate($template, Mandrill_Message_Type $message, array $content = array())
 	{
@@ -30,7 +26,6 @@ class Mandrill_Type_Messages extends Mandrill_Type_Abstract
 			'async' => $this->isAsync(),
 			'message' => $message->toArray()
 		);
-		
 		return $this->_request("/messages/send-template.json", $request);
 	}
 	

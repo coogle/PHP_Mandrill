@@ -59,9 +59,8 @@ abstract class Mandrill_Type_Abstract
 		$client->setRawData($requestDataJson);
 		
 		$response = $client->request();
-
-		$answer = json_decode($response->getBody(), true);
 		
+		$answer = json_decode($response->getBody(), true);
 		if($response->getStatus() != 200) {
 			throw new \Exception("Request Failed: {$answer['message']}");
 		}
