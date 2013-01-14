@@ -80,12 +80,12 @@ class Mandrill_Mail extends \Zend_Mail
 	{
 		if(is_null($recipient)) {
 				
-			if(!empty($this->_to) && is_array($this->_to)) {
-				foreach($this->_to as $to) {
+			if(!empty($this->_mandrillTo) && is_array($this->_mandrillTo)) {
+				foreach($this->_mandrillTo as $to) {
 					if(!isset($this->_privateVars[$to['email']])) {
 						$this->_privateVars[$to['email']] = array();
 					}
-						
+					
 					if(is_null($value)) {
 						$this->unsetPrivateVar($varName, $to['email']);
 					} else {
@@ -94,6 +94,7 @@ class Mandrill_Mail extends \Zend_Mail
 				}
 			}
 				
+			
 		} else {
 				
 			if(!isset($this->_privateVars[$recipient])) {
